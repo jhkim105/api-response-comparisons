@@ -1,0 +1,8 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: comparator-app
+endpoints:
+  v1: http://localhost:8081/api/v1
+  v2: http://localhost:8082/api/v2

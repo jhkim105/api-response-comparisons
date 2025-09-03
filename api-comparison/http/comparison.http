@@ -1,0 +1,89 @@
+### API Comparison Service Testing - Running on localhost:8080
+### Base URL: http://localhost:8080
+### This service compares responses between API V1 (port 8081) and API V2 (port 8082)
+
+### Service Status Check
+GET http://localhost:8080/compare/status
+Accept: application/json
+
+###
+
+### Compare Health Endpoints
+GET http://localhost:8080/compare/health
+Accept: application/json
+
+###
+
+### Compare All Users
+GET http://localhost:8080/compare/users
+Accept: application/json
+
+###
+
+### Compare User by ID - User 1
+GET http://localhost:8080/compare/users/1
+Accept: application/json
+
+###
+
+### Compare User by ID - User 2
+GET http://localhost:8080/compare/users/2
+Accept: application/json
+
+###
+
+### Compare User by ID - User 3
+GET http://localhost:8080/compare/users/3
+Accept: application/json
+
+###
+
+### Compare User by ID - User 10 (Dynamic)
+GET http://localhost:8080/compare/users/10
+Accept: application/json
+
+###
+
+### Compare All Products
+GET http://localhost:8080/compare/products
+Accept: application/json
+
+###
+
+### Compare Product by ID - Product 1
+GET http://localhost:8080/compare/products/1
+Accept: application/json
+
+###
+
+### Compare Product by ID - Product 2
+GET http://localhost:8080/compare/products/2
+Accept: application/json
+
+###
+
+### Compare Product by ID - Product 3
+GET http://localhost:8080/compare/products/3
+Accept: application/json
+
+###
+
+### Compare Product by ID - Product 5 (Dynamic)
+GET http://localhost:8080/compare/products/5
+Accept: application/json
+
+###
+
+### Compare All Endpoints (Bulk Comparison)
+### This will compare users, products, and health endpoints all at once
+GET http://localhost:8080/compare/all
+Accept: application/json
+
+###
+
+### Get Comparison Summary
+### This provides a summary of all comparisons with statistics
+GET http://localhost:8080/compare/summary
+Accept: application/json
+
+###

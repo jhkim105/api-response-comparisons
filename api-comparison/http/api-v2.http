@@ -1,0 +1,68 @@
+### API V2 Testing - Running on localhost:8082
+### Base URL: http://localhost:8082
+
+### Health Check
+GET http://localhost:8082/api/v2/health
+Accept: application/json
+
+###
+
+### Get All Users
+GET http://localhost:8082/api/v2/users
+Accept: application/json
+
+###
+
+### Get User by ID - User 1
+GET http://localhost:8082/api/v2/users/1
+Accept: application/json
+
+###
+
+### Get User by ID - User 2
+GET http://localhost:8082/api/v2/users/2
+Accept: application/json
+
+###
+
+### Get User by ID - User 3
+GET http://localhost:8082/api/v2/users/3
+Accept: application/json
+
+###
+
+### Get User by ID - User 10 (Dynamic)
+GET http://localhost:8082/api/v2/users/10
+Accept: application/json
+
+###
+
+### Get All Products
+GET http://localhost:8082/api/v2/products
+Accept: application/json
+
+###
+
+### Get Product by ID - Product 1
+GET http://localhost:8082/api/v2/products/1
+Accept: application/json
+
+###
+
+### Get Product by ID - Product 2
+GET http://localhost:8082/api/v2/products/2
+Accept: application/json
+
+###
+
+### Get Product by ID - Product 3
+GET http://localhost:8082/api/v2/products/3
+Accept: application/json
+
+###
+
+### Get Product by ID - Product 5 (Dynamic)
+GET http://localhost:8082/api/v2/products/5
+Accept: application/json
+
+###

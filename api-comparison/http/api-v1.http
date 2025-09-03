@@ -1,0 +1,68 @@
+### API V1 Testing - Running on localhost:8081
+### Base URL: http://localhost:8081
+
+### Health Check
+GET http://localhost:8081/api/v1/health
+Accept: application/json
+
+###
+
+### Get All Users
+GET http://localhost:8081/api/v1/users
+Accept: application/json
+
+###
+
+### Get User by ID - User 1
+GET http://localhost:8081/api/v1/users/1
+Accept: application/json
+
+###
+
+### Get User by ID - User 2
+GET http://localhost:8081/api/v1/users/2
+Accept: application/json
+
+###
+
+### Get User by ID - User 3
+GET http://localhost:8081/api/v1/users/3
+Accept: application/json
+
+###
+
+### Get User by ID - User 10 (Dynamic)
+GET http://localhost:8081/api/v1/users/10
+Accept: application/json
+
+###
+
+### Get All Products
+GET http://localhost:8081/api/v1/products
+Accept: application/json
+
+###
+
+### Get Product by ID - Product 1
+GET http://localhost:8081/api/v1/products/1
+Accept: application/json
+
+###
+
+### Get Product by ID - Product 2
+GET http://localhost:8081/api/v1/products/2
+Accept: application/json
+
+###
+
+### Get Product by ID - Product 3
+GET http://localhost:8081/api/v1/products/3
+Accept: application/json
+
+###
+
+### Get Product by ID - Product 5 (Dynamic)
+GET http://localhost:8081/api/v1/products/5
+Accept: application/json
+
+###

@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: check-app
+
+logging:
+  level:
+    com.example.checkapp: DEBUG
+    org.springframework.web: DEBUG
+    reactor.netty: INFO
+
+# WebClient configuration
+webclient:
+  timeout:
+    connection: 5000
+    read: 10000
+    write: 10000
+
+# API endpoints configuration
+api:
+  v1:
+    base-url: http://localhost:8081
+  v2:
+    base-url: http://localhost:8082

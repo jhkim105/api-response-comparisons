@@ -1,0 +1,25 @@
+### v1 API - get user 1
+GET http://localhost:8081/api/v1/users/1
+Accept: application/json
+
+### v1 API - get user 2
+GET http://localhost:8081/api/v1/users/2
+Accept: application/json
+
+
+### v2 API - get user 1
+GET http://localhost:8082/api/v2/users/1
+Accept: application/json
+
+### v2 API - get user 2
+GET http://localhost:8082/api/v2/users/2
+Accept: application/json
+
+
+### Comparator API - compare user 1
+GET http://localhost:8080/compare/users/1
+Accept: application/json
+
+### Comparator API - compare user 2
+GET http://localhost:8080/compare/users/2
+Accept: application/json

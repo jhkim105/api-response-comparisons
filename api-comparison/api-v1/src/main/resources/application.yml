@@ -1,0 +1,11 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: mock-v1
+
+logging:
+  level:
+    com.example.mockv1: DEBUG
+    org.springframework.web: DEBUG
