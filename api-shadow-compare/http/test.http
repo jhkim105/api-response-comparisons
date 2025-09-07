@@ -1,0 +1,124 @@
+### 환경 변수
+@host = localhost
+@port = 8080
+@baseUrl = http://{{host}}:{{port}}
+
+### 1) v1 호출: 응답 본문을 전역 변수에 저장
+POST {{baseUrl}}/api/v1/foo
+Content-Type: application/json
+
+{
+  "id": 123,
+  "q": "hello"
+}
+
+> {%
+    // v1 응답 저장
+    client.global.set("v1Status", response.status);
+    client.global.set("v1Body", response.body);
+
+    // 간단 검증
+    client.test("v1 status is 200", function () {
+        client.assert(response.status === 200, "v1 status was not 200");
+    });
+%}
+
+### 2) v2 호출: v1과 같은 페이로드로 호출 후, v1/v2 비교
+POST {{baseUrl}}/api/v2/foo
+Content-Type: application/json
+
+{
+  "id": 123,
+  "q": "hello"
+}
+
+> {%
+    client.global.set("v2Status", response.status);
+    client.global.set("v2Body", response.body);
+
+    const v1 = JSON.parse(client.global.get("v1Body"));
+    const v2 = JSON.parse(client.global.get("v2Body"));
+
+    /**
+     * 딥소트 비교 유틸:
+     * - 객체 키 정렬
+     * - 배열도 정렬(순서가 의미 없다고 가정할 때)
+     *   → 배열 순서가 의미가 있다면, 아래 sortArrays=false 옵션을 사용하거나
+     *     배열 분기에서 그대로 반환하세요.
+     */
+    function sortDeep(x, { sortArrays = true } = {}) {
+        if (Array.isArray(x)) {
+            const mapped = x.map(e => sortDeep(e, { sortArrays }));
+            return sortArrays
+                ? mapped.sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)))
+                : mapped; // 배열 순서 보존
+        }
+        if (x && typeof x === "object") {
+            const out = {};
+            Object.keys(x).sort().forEach(k => out[k] = sortDeep(x[k], { sortArrays }));
+            return out;
+        }
+        return x;
+    }
+
+    // 필요 시 마스킹(예: traceId, timestamp 등 비결정 필드)
+    function mask(obj) {
+        const cloned = JSON.parse(JSON.stringify(obj));
+        // 예시: (필요 시 주석 해제)
+        // if (cloned.traceId) cloned.traceId = "<masked>";
+        // if (cloned.timestamp) cloned.timestamp = 0;
+        return cloned;
+    }
+
+    const v1m = mask(v1);
+    const v2m = mask(v2);
+
+    // 1) 배열 순서 무시 비교
+    client.test("v1 == v2 (deep-equal, arrays sorted)", function () {
+        const a = JSON.stringify(sortDeep(v1m, { sortArrays: true }));
+        const b = JSON.stringify(sortDeep(v2m, { sortArrays: true }));
+        client.assert(a === b, "v1 and v2 differ (with arrays sorted)");
+    });
+
+    // 2) 배열 순서까지 동일한지 비교(선택)
+    client.test("v1 == v2 (strict, keep array order)", function () {
+        const a = JSON.stringify(sortDeep(v1m, { sortArrays: false }));
+        const b = JSON.stringify(sortDeep(v2m, { sortArrays: false }));
+        client.assert(a === b, "v1 and v2 differ (strict order)");
+    });
+
+    // 상태 코드 비교
+    client.test("status codes equal", function () {
+        client.assert(client.global.get("v1Status") === String(response.status), "status codes differ");
+    });
+%}
+
+### 3) 다른 샘플 데이터로 빠른 재검증
+POST {{baseUrl}}/api/v1/foo
+Content-Type: application/json
+
+{
+  "id": 777,
+  "q": "world"
+}
+
+> {% client.global.set("v1Body", response.body); %}
+
+###
+POST {{baseUrl}}/api/v2/foo
+Content-Type: application/json
+
+{
+  "id": 777,
+  "q": "world"
+}
+
+> {%
+    const v1 = JSON.parse(client.global.get("v1Body"));
+    const v2 = JSON.parse(response.body);
+
+    // 간단 동치 테스트
+    client.test("quick equality (ordered)", function () {
+        client.assert(JSON.stringify(v1) === JSON.stringify(v2), "v1 and v2 responses differ");
+    });
+%}

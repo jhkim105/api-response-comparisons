@@ -1,0 +1,5 @@
+shadow:
+  differential-testing:
+    enabled: true
+    sample-rate: 1.0
+    timeout-ms: 1000
