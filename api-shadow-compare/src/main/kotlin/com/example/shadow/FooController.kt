@@ -24,4 +24,18 @@ class FooController(
     @PostMapping("/v2/foo")
     fun fooV2(@RequestBody req: FooRequest): FooResponse =
         v2.handle(req)
+
+    @PostMapping("/v1/foo")
+    fun fooV1Sampling(@RequestBody req: FooRequest): FooResponse {
+        val v1Res = v1.handle(req)
+        Sampler.maybe(rate = 0.2, seed = "foo-shadow-2025") {
+            comparator.compareAsync(
+                apiName = "foo",
+                req = req,
+                v1Res = v1Res,
+                v2Call = { r -> v2.handle(r) }
+            )
+        }
+        return v1Res
+    }
 }
