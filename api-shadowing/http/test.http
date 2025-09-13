@@ -1,0 +1,13 @@
+###
+GET http://localhost:8081/api/v1/foo/123?q=hello
+
+
+###
+POST http://localhost:8081/api/v1/foo
+Content-Type: application/json
+
+{
+  "id": 123,
+  "q": "hello"
+}
+

@@ -1,0 +1,8 @@
+server:
+  port: 8081
+
+shadowing:
+  enabled: true
+  sample-rate: 1.0
+  timeout-ms: 1000
+  base-url: http://localhost:8081

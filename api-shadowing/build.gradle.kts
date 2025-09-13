@@ -17,6 +17,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.8.1")
     implementation("com.github.java-json-tools:json-patch:1.13")
+    implementation("io.github.oshai:kotlin-logging-jvm:7.0.6")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     // --- Kotest core ---
     testImplementation("io.kotest:kotest-runner-junit5:5.9.1")     // JUnit5 runner

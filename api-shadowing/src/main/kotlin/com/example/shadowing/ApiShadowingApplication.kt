@@ -1,11 +1,11 @@
-package com.example.shadow
+package com.example.shadowing
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class ShadowCompareApplication
+class ApiShadowingApplication
 
 fun main(args: Array<String>) {
-    runApplication<ShadowCompareApplication>(*args)
+    runApplication<ApiShadowingApplication>(*args)
 }
