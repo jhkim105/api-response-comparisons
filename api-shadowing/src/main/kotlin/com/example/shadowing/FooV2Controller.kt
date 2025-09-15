@@ -1,15 +1,12 @@
 package com.example.shadowing
 
-import com.example.shadowing.aop.ApiComparator
 import com.example.shadowing.aop.Shadowing
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api")
 class FooV2Controller(
-    private val v1: FooV1Service,
-    private val v2: FooV2Service,
-    private val comparator: ApiComparator
+    private val v2: FooV2Service
 ) {
 
     @PostMapping("/v2/foo")
